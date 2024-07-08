@@ -97,7 +97,7 @@ const Navbar = () => {
 
                     <Link to={"/"}>
                         {/* <img className="w-14 md:w-24" src={logo} alt="Logo" /> */}
-                        <h2 className="text-4xl text-black font-bold">Library Manager</h2>
+                        <h2 className="text-4xl text-[#151515] font-bold">Library Manager</h2>
                     </Link>
 
                 </div>
@@ -113,17 +113,17 @@ const Navbar = () => {
                 <div className="navbar-end mr-6 md:mr-0">
 
                     <button className="btn-circle text-2xl">
-                        <IoSearchSharp />
+                        <IoSearchSharp className="hover:text-[#c0392b]"/>
                     </button>
 
                     <Link to={"/cartDetails"}>
                         <button className="btn-circle text-2xl">
-                            <HiOutlineShoppingBag />
+                            <HiOutlineShoppingBag  className="hover:text-[#c0392b]"/>
                         </button>
                     </Link>
 
                     <NavLink to="/signIn">
-                        <button className="bg-[#FF3811] hover:bg-[#d23111] px-4 py-2 text-white rounded-lg">Sign In</button>
+                        <button className="bg-[#c0392b] hover:bg-[#e74c3c] px-4 py-2 text-white rounded-lg">Sign In</button>
                     </NavLink>
 
                     {/* <div className="flex items-center gap-3">

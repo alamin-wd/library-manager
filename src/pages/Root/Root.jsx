@@ -1,16 +1,19 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../../components/Shared/Navbar/Navbar";
+import Footer from "../../components/Shared/Footer/Footer";
 
 const Root = () => {
 
-    return ( 
+    return (
 
-        <div className="max-w-full px-10">
+        <div className="max-w-full">
 
             <Navbar></Navbar>
 
-            <Outlet></Outlet>
-            
+            <div className="mt-16">
+                <Outlet></Outlet>
+                <Footer></Footer>
+            </div>
         </div>
     );
 };

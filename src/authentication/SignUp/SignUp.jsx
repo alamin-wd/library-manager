@@ -1,18 +1,97 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SocialLogins from "../SocialLogins/SocialLogins";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import { Helmet } from "react-helmet-async";
 import bgImg from "../../assets/signUp/bgImg.jpg";
+import LoadingSpinner from "../../components/Shared/LoadingSpinner/LoadingSpinner";
+import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
 
+    const { createUser, user, setUser } = useContext(AuthContext);
+
     const [showPassword, setShowPassword] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    const navigate = useNavigate();
 
     const handleSignUp = (e) => {
         e.preventDefault();
 
+        const form = e.target;
+
+        const userName = form.name.value;
+        const email = form.email.value;
+        const password = form.password.value;
+        const photoURL = form.photoURL.value;
+
+        const isPasswordValid = validatePassword(password);
+
+        if (!isPasswordValid) {
+            Swal.fire({
+                html: 'Password must contain:<br>- At least one uppercase letter<br>- At least one lowercase letter<br>- Minimum 6 characters',
+                confirmButtonText: 'OK'
+            });
+            return;
+        }
+
+        createUser(email, password, userName, photoURL)
+            .then(result => {
+                console.log(result);
+
+                const user = { userName, email, password, photoURL };
+
+                fetch('https://art-vista-server.vercel.app/user', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(user)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.insertedId) {
+                            Swal.fire({
+                                title: 'Congratulation!',
+                                text: 'You have Successfully Sign Up',
+                                icon: 'success',
+                                confirmButtonText: 'Next'
+                            })
+                                .then(() => {
+                                    navigate('/');
+                                    form.reset();
+                                });
+                        }
+                    })
+            })
+            .catch(error => {
+                console.error(error);
+            })
+
     };
+
+    //To validate password
+    const validatePassword = (password) => {
+
+        const uppercaseRegex = /[A-Z]/;
+        const lowercaseRegex = /[a-z]/;
+        const lengthRequirement = password.length >= 6;
+
+        return uppercaseRegex.test(password) && lowercaseRegex.test(password) && lengthRequirement;
+    };
+
+    useEffect(() => {
+
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 500);
+        window.scrollTo(0, 0);
+    }, []);
+
+    if (isLoading) {
+        return <LoadingSpinner></LoadingSpinner>;
+    }
 
     return (
 

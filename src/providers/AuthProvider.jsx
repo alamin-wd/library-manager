@@ -1,9 +1,7 @@
-
 import { createUserWithEmailAndPassword, getAuth, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
 import PropTypes from 'prop-types';
 import app from '../firebase/firebase.config';
 import { createContext, useEffect, useState } from 'react';
-
 
 
 // Initialize Firebase Authentication and get a reference to the service

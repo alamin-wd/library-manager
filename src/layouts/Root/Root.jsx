@@ -11,7 +11,9 @@ const Root = () => {
             <Navbar></Navbar>
 
             <div className="mt-16">
-                <Outlet></Outlet>
+                <div className="min-h-[calc(100vh-450px)]">
+                    <Outlet></Outlet>
+                </div>
                 <Footer></Footer>
             </div>
         </div>

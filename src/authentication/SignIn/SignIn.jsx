@@ -1,18 +1,67 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import SocialLogins from "../SocialLogins/SocialLogins";
 import { Helmet } from "react-helmet-async";
 import bgImg from "../../assets/signUp/bgImg.jpg";
+import LoadingSpinner from "../../components/Shared/LoadingSpinner/LoadingSpinner";
+import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const SignIn = () => {
 
+  const { signIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleSignIn = (e) => {
     e.preventDefault();
 
+    const form = e.target;
+
+    const email = form.email.value;
+    const password = form.password.value;
+
+    signIn(email, password)
+      .then(result => {
+        console.log(result.user);
+        Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          text: 'You have successfully Sign In!',
+          confirmButtonColor: '#3085d6'
+        });
+
+        form.reset();
+        // navigate(location?.state ? location.state : "/");
+        navigate('/');
+      })
+
+      .catch(error => {
+        console.error(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error.message,
+          confirmButtonColor: '#d33'
+        });
+      });
   };
+
+  useEffect(() => {
+
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+    window.scrollTo(0, 0);
+  }, []);
+
+  if (isLoading) {
+    return <LoadingSpinner></LoadingSpinner>;
+  }
 
   return (
 
@@ -22,10 +71,6 @@ const SignIn = () => {
       </Helmet>
 
       <div className="mt-6 py-6 bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100 ...">
-        <div className="text-center">
-
-
-        </div>
 
         <div className="w-3/4 mx-auto flex flex-col md:flex-row md:justify-center md:items-center my-10">
 

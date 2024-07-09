@@ -133,8 +133,13 @@ const Navbar = () => {
 
                                 <div className="dropdown dropdown-end">
                                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                                        <div className="w-12 rounded-full">
-                                            <img src={user.photoURL} alt="User Avatar" />
+                                        <div className="w-12 rounded-full"
+                                        title={user?.displayName}>
+                                           
+                                            <img 
+                                            referrerPolicy="no-referrer"
+                                            src={user?.photoURL} 
+                                            alt="User Avatar" />
                                         </div>
                                     </label>
 

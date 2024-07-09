@@ -11,7 +11,7 @@ const firebaseConfig = {
     messagingSenderId: import.meta.env.VITE_MESSAGINGSENDERID,
     appId: import.meta.env.VITE_APPID 
 };
- 
+  
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export default app;

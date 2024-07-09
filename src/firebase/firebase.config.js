@@ -1,7 +1,7 @@
 
 import { initializeApp } from "firebase/app";
 
-//Firebase configuration
+//Firebase configuration 
 
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_APIKEY,

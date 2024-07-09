@@ -1,12 +1,12 @@
 
 import { createBrowserRouter } from "react-router-dom";
 import Home from "../../pages/HomePage/Home/Home";
-import Root from "../../pages/Root/Root";
+import Root from "../../layouts/Root/Root";
 import AllBooks from "../../pages/AllBooks/AllBooks";
 import BorrowedBooks from "../../pages/BorrowedBooks/BorrowedBooks";
 import AddBooks from "../../pages/AddBooks/AddBooks";
-import SignUp from "../../pages/SignUp/SignUp";
-import SignIn from "../../pages/SignIn/SignIn";
+import SignUp from "../../authentication/SignUp/SignUp";
+import SignIn from "../../authentication/SignIn/SignIn";
 
 const router = createBrowserRouter([
     {
@@ -14,7 +14,7 @@ const router = createBrowserRouter([
         element: <Root></Root>,
         children: [
             {
-                path: "/",
+                index: true,
                 element: <Home></Home>,
             },
 

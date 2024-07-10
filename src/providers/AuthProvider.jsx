@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, getAuth, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import PropTypes from 'prop-types';
 import app from '../firebase/firebase.config';
 import { createContext, useEffect, useState } from 'react';
@@ -50,16 +50,19 @@ const AuthProvider = ({ children }) => {
         return signOut(auth);
     }
 
+    const updateUserProfile = (name, photoURL) => {
+        return updateProfile(auth.currentUser, {
+          displayName: name,
+          photoURL: photoURL,
+        })
+      }
+
     // Observer
     useEffect(() => {
-        const unSubscribe = onAuthStateChanged(auth, (user) => {
+        const unSubscribe = onAuthStateChanged(auth, currentUser => {
 
-            if (user) {
-                setUser(user);
-            }
-            else {
-                setUser(null);
-            }
+                setUser(currentUser);
+            
             setLoading(false);
         });
 
@@ -76,6 +79,7 @@ const AuthProvider = ({ children }) => {
         signIn,
         googleLogin,
         githubLogin,
+        updateUserProfile,
         LogOut
 
     }

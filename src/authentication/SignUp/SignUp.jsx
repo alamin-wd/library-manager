@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import SocialLogins from "../SocialLogins/SocialLogins";
 import { useContext, useEffect, useState } from "react";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
@@ -10,18 +10,19 @@ import Swal from "sweetalert2";
 
 const SignUp = () => {
 
-    const { createUser, user, setUser } = useContext(AuthContext);
+    const { createUser, user, setUser, updateUserProfile } = useContext(AuthContext);
 
     const [showPassword, setShowPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleSignUp = (e) => {
         e.preventDefault();
 
         const form = e.target;
 
-        const userName = form.name.value;
+        const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
         const photoURL = form.photoURL.value;
@@ -36,11 +37,14 @@ const SignUp = () => {
             return;
         }
 
-        createUser(email, password, userName, photoURL)
+        createUser(email, password)
             .then(result => {
                 console.log(result);
 
-                const user = { userName, email, password, photoURL };
+                updateUserProfile(name, photoURL)
+                setUser({ ...user, displayName: name, photoURL: photoURL});
+
+                const user = { name, email, password, photoURL };
 
                 fetch('https://art-vista-server.vercel.app/user', {
                     method: 'POST',
@@ -59,7 +63,7 @@ const SignUp = () => {
                                 confirmButtonText: 'Next'
                             })
                                 .then(() => {
-                                    navigate('/');
+                                    navigate(location?.state ? location.state : "/");
                                     form.reset();
                                 });
                         }

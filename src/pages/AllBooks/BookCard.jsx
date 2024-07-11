@@ -23,8 +23,8 @@ const BookCard = ({ book }) => {
                 <h6 className="text-[#444444] text-xl font-semibold my-2">{rating}</h6>
 
                 <p color="text-[#737373] mt-3">{shortDescription}</p>
-
-                <NavLink to="">
+                {/* to={`update-book/${_id}`} */}
+                <NavLink >
                     <button className="bg-[#c0392b] hover:bg-[#e74c3c] px-4 py-1 text-white text-sm rounded-lg mt-4">Update</button>
                 </NavLink>
             </div>

@@ -1,17 +1,58 @@
+
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from 'axios';
 import { IoIosArrowDown } from "react-icons/io";
+import Swal from "sweetalert2";
 
 const BookUpdateForm = () => {
+    const { id } = useParams();
+    const [book, setBook] = useState(null);
 
-    const handleSubmit = (e) => {
+    useEffect(() => {
+        const fetchBook = async () => {
+            try {
+                const res = await axios.get(`http://localhost:5000/allBooks/${id}`);
+                setBook(res.data);
+            } catch (error) {
+                console.error("Error getting book data:", error);
+            }
+        };
+
+        fetchBook();
+    }, [id]);
+
+    const handleSubmit = async (e) => {
+
         e.preventDefault();
+        const form = e.target;
 
+        const updatedBook = {
+            bookName: form.bookName.value,
+            authorName: form.authorName.value,
+            category: form.category.value,
+            rating: form.rating.value,
+            image: form.image.value
+        };
+
+        try {
+            await axios.put(`http://localhost:5000/update-book/${id}`, updatedBook);
+
+            Swal.fire("Success", "Book updated successfully!", "success");
+            
+        } 
+        catch (error) {
+            Swal.fire("Error", "There was an error updating the book", "error");
+        }
     };
 
+    if (!book) {
+        return <p>Loading...</p>;
+    }
+
     return (
-
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
-            <div className="bg-white shadow-xl rounded-lg px-8 pt-6 pb-8 my-10 w-full max-w-5xl ">
-
+            <div className="bg-white shadow-xl rounded-lg px-8 pt-6 pb-8 my-10 w-full max-w-5xl">
                 <div className='text-center mb-6'>
                     <h2 className="text-[#151515] text-xl md:text-3xl font-semibold md:font-semibold mb-4">Update Book Information</h2>
                     <p className='text-[#737373] italic text-sm'>
@@ -22,11 +63,10 @@ const BookUpdateForm = () => {
                 <form onSubmit={handleSubmit}>
                     <div className="flex flex-col md:flex-row md:justify-center md:items-center gap-20">
                         <div>
-                            <img src="https://i.ibb.co/Qb723hx/The-Goldfinch.jpg" alt="" />
+                            <img src={book.image} alt={book.bookName} />
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text text-lg font-semibold">Name</span>
@@ -35,7 +75,9 @@ const BookUpdateForm = () => {
                                     type="text"
                                     name="bookName"
                                     placeholder="Book Name"
-                                    className="input input-bordered text-gray-800" />
+                                    className="input input-bordered text-gray-800"
+                                    defaultValue={book.bookName}
+                                />
                             </div>
 
                             <div className="form-control">
@@ -47,8 +89,9 @@ const BookUpdateForm = () => {
                                     name="authorName"
                                     placeholder="Author Name"
                                     className="input input-bordered text-gray-800"
-
-                                    required />
+                                    defaultValue={book.authorName}
+                                    required
+                                />
                             </div>
 
                             <div className="form-control relative">
@@ -58,8 +101,9 @@ const BookUpdateForm = () => {
                                 <select
                                     name="category"
                                     className="input input-bordered text-gray-800 appearance-none pr-10"
-                                    required>
-
+                                    defaultValue={book.category}
+                                    required
+                                >
                                     <option value="">Select a category</option>
                                     <option value="Arts & Music">Arts & Music</option>
                                     <option value="Biographies">Biographies</option>
@@ -68,7 +112,6 @@ const BookUpdateForm = () => {
                                     <option value="Kids">Kids</option>
                                     <option value="Religion">Religion</option>
                                 </select>
-
                                 <div className="pointer-events-none absolute inset-y-0 right-0 top-11 flex items-center px-2 text-gray-800">
                                     <IoIosArrowDown />
                                 </div>
@@ -83,7 +126,7 @@ const BookUpdateForm = () => {
                                     name="rating"
                                     placeholder="Rating"
                                     className="input input-bordered text-gray-800"
-
+                                    defaultValue={book.rating}
                                     min="1"
                                     max="5"
                                     required
@@ -99,7 +142,7 @@ const BookUpdateForm = () => {
                                     name="image"
                                     placeholder="Use Image URL"
                                     className="input input-bordered text-gray-800"
-
+                                    defaultValue={book.image}
                                     required
                                 />
                             </div>
@@ -114,12 +157,11 @@ const BookUpdateForm = () => {
 
                         </div>
                     </div>
-
                 </form>
-
             </div>
         </div>
     );
 };
 
 export default BookUpdateForm;
+

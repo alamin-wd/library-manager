@@ -38,7 +38,7 @@ const router = createBrowserRouter([
             },
 
             {
-                path: "/update-book",
+                path: "/update-book/:id",
                 element: <BookUpdateForm></BookUpdateForm>,
                 // element: <PrivateRoute><AddBooks></AddBooks></PrivateRoute>,
             },

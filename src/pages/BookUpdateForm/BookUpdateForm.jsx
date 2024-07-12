@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import { IoIosArrowDown } from "react-icons/io";
 import Swal from "sweetalert2";
+import LoadingSpinner from "../../components/Shared/LoadingSpinner/LoadingSpinner";
 
 const BookUpdateForm = () => {
     const { id } = useParams();
@@ -47,7 +48,7 @@ const BookUpdateForm = () => {
     };
 
     if (!book) {
-        return <p>Loading...</p>;
+        return <p><LoadingSpinner></LoadingSpinner></p>;
     }
 
     return (

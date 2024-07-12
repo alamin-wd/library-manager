@@ -94,8 +94,8 @@ const Navbar = () => {
                     </div>
 
                     <Link to="/">
-                        {/* <img className="w-14 md:w-24" src={logo} alt="Logo" /> */}
-                        <h2 className="text-4xl text-[#151515] font-bold">Library Manager</h2>
+                        
+                        <h2 className="text-xl md:text-4xl font-bold text-[#e74c3c]">Library Manager</h2>
                     </Link>
 
                 </div>

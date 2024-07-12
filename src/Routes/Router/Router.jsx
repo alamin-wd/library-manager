@@ -1,4 +1,3 @@
-
 import { createBrowserRouter } from "react-router-dom";
 import Home from "../../pages/HomePage/Home/Home";
 import Root from "../../layouts/Root/Root";
@@ -10,7 +9,8 @@ import SignIn from "../../authentication/SignIn/SignIn";
 import BookUpdateForm from "../../pages/BookUpdateForm/BookUpdateForm";
 import CategoryPage from "../../pages/CategoryPage/CategoryPage";
 import BookDetails from "../../pages/BookDetails/BookDetails";
-// import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
+
 
 const router = createBrowserRouter([
     {
@@ -21,45 +21,34 @@ const router = createBrowserRouter([
                 index: true,
                 element: <Home></Home>,
             },
-
             {
                 path: "/all-books",
                 element: <AllBooks></AllBooks>,
             },
-
             {
                 path: "/borrowed-books",
-                element: <BorrowedBooks></BorrowedBooks>,
-                // element: <PrivateRoute><BorrowedBooks></BorrowedBooks></PrivateRoute>,
+                element: <PrivateRoute><BorrowedBooks /></PrivateRoute>,
             },
-
             {
                 path: "/add-books",
-                element: <AddBooks></AddBooks>,
-                // element: <PrivateRoute><AddBooks></AddBooks></PrivateRoute>,
+                element: <PrivateRoute><AddBooks /></PrivateRoute>,
             },
-
             {
                 path: "/update-book/:id",
-                element: <BookUpdateForm></BookUpdateForm>,
-                // element: <PrivateRoute><AddBooks></AddBooks></PrivateRoute>,
+                element: <PrivateRoute><BookUpdateForm /></PrivateRoute>,
             },
-
             {
-                path:"/category/:categoryName",
-                element: <CategoryPage></CategoryPage>,
+                path: "/category/:categoryName",
+                element: <PrivateRoute><CategoryPage /></PrivateRoute>,
             },
-
             {
-                path:"/book-details/:id",
-                element: <BookDetails></BookDetails>,
+                path: "/book-details/:id",
+                element: <PrivateRoute><BookDetails /></PrivateRoute>,
             },
-
             {
                 path: "/signUp",
                 element: <SignUp></SignUp>,
             },
-
             {
                 path: "/signIn",
                 element: <SignIn></SignIn>,

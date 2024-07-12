@@ -80,10 +80,10 @@ const AllBooks = () => {
                 <title>Library Manager | All Books</title>
             </Helmet>
 
-            <div className="w-full flex flex-col md:flex-row gap-20 items-start">
+            <div className="w-full flex flex-col md:flex-row gap-10 items-start">
 
-                {/* Right Side */}
-                <div className="w-1/3">
+                {/* Left Side */}
+                <div className="w-1/4">
                     <h3 className="text-3xl text-[#151515] font-bold">
                         Categories
                     </h3>
@@ -172,7 +172,7 @@ const AllBooks = () => {
                 </div>
 
                 {/* Right Side */}
-                <div className="w-full mt-4">
+                <div className="w-3/4 mt-4">
 
                     <div className='flex flex-col md:flex-row md:justify-between items-center mb-12'>
 
@@ -191,7 +191,7 @@ const AllBooks = () => {
                         <div className='w-full md:w-1/3'>
                             <label className="input input-bordered flex items-center gap-2">
                                 <input type="text" className="grow" placeholder="Search" />
-                                <IoMdSearch  className='text-xl text-[#c0392b]'/>
+                                <IoMdSearch className='text-xl text-[#c0392b]' />
                             </label>
                         </div>
 

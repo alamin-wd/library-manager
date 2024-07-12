@@ -8,6 +8,8 @@ import AddBooks from "../../pages/AddBooks/AddBooks";
 import SignUp from "../../authentication/SignUp/SignUp";
 import SignIn from "../../authentication/SignIn/SignIn";
 import BookUpdateForm from "../../pages/BookUpdateForm/BookUpdateForm";
+import CategoryPage from "../../pages/CategoryPage/CategoryPage";
+import BookDetails from "../../pages/BookDetails/BookDetails";
 // import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
@@ -41,6 +43,16 @@ const router = createBrowserRouter([
                 path: "/update-book/:id",
                 element: <BookUpdateForm></BookUpdateForm>,
                 // element: <PrivateRoute><AddBooks></AddBooks></PrivateRoute>,
+            },
+
+            {
+                path:"/category/:categoryName",
+                element: <CategoryPage></CategoryPage>,
+            },
+
+            {
+                path:"/book-details/:id",
+                element: <BookDetails></BookDetails>,
             },
 
             {

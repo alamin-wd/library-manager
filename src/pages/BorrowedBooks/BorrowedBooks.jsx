@@ -18,7 +18,7 @@ const BorrowedBooks = () => {
 
             try {
 
-                const res = await fetch(`http://localhost:5000/borrowedBooks?email=${user.email}`);
+                const res = await fetch(`https://library-manager-server.vercel.app/borrowedBooks?email=${user.email}`);
 
                 const data = await res.json();
                 setBorrowedBooks(data);

@@ -25,7 +25,7 @@ const BookDetails = () => {
         const fetchBook = async () => {
 
             try {
-                const res = await fetch(`http://localhost:5000/allBooks/${id}`);
+                const res = await fetch(`https://library-manager-server.vercel.app/allBooks/${id}`);
                 if (!res.ok) {
                     throw new Error('Network res was not ok');
                 }
@@ -53,7 +53,7 @@ const BookDetails = () => {
             return;
         }
 
-        const res = await fetch('http://localhost:5000/borrow', {
+        const res = await fetch('https://library-manager-server.vercel.app/borrow', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

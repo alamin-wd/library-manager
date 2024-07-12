@@ -13,7 +13,7 @@ const BookUpdateForm = () => {
     useEffect(() => {
         const fetchBook = async () => {
             try {
-                const res = await axios.get(`http://localhost:5000/allBooks/${id}`);
+                const res = await axios.get(`https://library-manager-server.vercel.app/allBooks/${id}`);
                 setBook(res.data);
             } catch (error) {
                 console.error("Error getting book data:", error);
@@ -37,7 +37,7 @@ const BookUpdateForm = () => {
         };
 
         try {
-            await axios.put(`http://localhost:5000/update-book/${id}`, updatedBook);
+            await axios.put(`https://library-manager-server.vercel.app/update-book/${id}`, updatedBook);
 
             Swal.fire("Success", "Book updated successfully!", "success");
             

@@ -14,7 +14,7 @@ const CategoryPage = () => {
 
         const books = async () => {
             try {
-                const res = await fetch('http://localhost:5000/allBooks');
+                const res = await fetch('https://library-manager-server.vercel.app/allBooks');
 
                 if (!res.ok) {
                     Error('Error getting books');

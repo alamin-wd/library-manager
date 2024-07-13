@@ -28,7 +28,7 @@ const AllBooks = () => {
                 setIsLoading(false);
             })
             .catch(error => {
-                console.error('Error fetching data:', error);
+                console.error('Error Getting Data:', error);
                 setIsLoading(false);
             });
         window.scrollTo(0, 0);

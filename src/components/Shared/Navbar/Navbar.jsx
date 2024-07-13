@@ -3,6 +3,7 @@ import { IoSearchSharp } from "react-icons/io5";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
+import { RiMenuLine } from "react-icons/ri";
 
 const Navbar = () => {
 
@@ -15,10 +16,10 @@ const Navbar = () => {
     useEffect(() => {
         const handleScroll = () => {
             if (window.scrollY > lastScrollY) {
-                
+
                 setIsNavbarVisible(false);
             } else {
-                
+
                 setIsNavbarVisible(true);
             }
             setLastScrollY(window.scrollY);
@@ -69,18 +70,7 @@ const Navbar = () => {
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-5 w-5"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M4 6h16M4 12h8m-8 6h16" />
-                            </svg>
+                            <RiMenuLine className="text-2xl text-[#c0392b] font-extrabold" />
                         </div>
                         <ul
                             tabIndex={0}
@@ -94,8 +84,8 @@ const Navbar = () => {
                     </div>
 
                     <Link to="/">
-                        
-                        <h2 className="text-xl md:text-4xl font-bold text-[#e74c3c]">Library Manager</h2>
+
+                        <h2 className="text-xl md:text-4xl font-bold text-[#c0392b]">Library Manager</h2>
                     </Link>
 
                 </div>
@@ -111,12 +101,12 @@ const Navbar = () => {
                 <div className="navbar-end mr-6 md:mr-0">
 
                     <button className="btn-circle text-2xl">
-                        <IoSearchSharp className="hover:text-[#c0392b]"/>
+                        <IoSearchSharp className="hover:text-[#c0392b]" />
                     </button>
 
                     <Link to={"/cartDetails"}>
                         <button className="btn-circle text-2xl">
-                            <HiOutlineShoppingBag  className="hover:text-[#c0392b]"/>
+                            <HiOutlineShoppingBag className="hover:text-[#c0392b]" />
                         </button>
                     </Link>
 
@@ -134,16 +124,16 @@ const Navbar = () => {
                                 <div className="dropdown dropdown-end">
                                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                         <div className="w-12 rounded-full"
-                                        title={user?.displayName}>
-                                           
-                                            <img 
-                                            referrerPolicy="no-referrer"
-                                            src={user?.photoURL} 
-                                            alt="User Avatar" />
+                                            title={user?.displayName}>
+
+                                            <img
+                                                referrerPolicy="no-referrer"
+                                                src={user?.photoURL}
+                                                alt="User Avatar" />
                                         </div>
                                     </label>
 
-                                    <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-200 rounded-lg w-40">
+                                    <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-200 rounded-lg w-52">
                                         <li>
                                             <a>{user.displayName}</a>
                                         </li>
@@ -151,9 +141,8 @@ const Navbar = () => {
                                             <a>{user.email}</a>
                                         </li>
                                         <li>
-                                            <a href="/updateItems">Update Items</a>
+                                            <a href="/borrowed-books">My Borrowed Books</a>
                                         </li>
-
                                         <li>
                                             <a onClick={handleSignOut}>Sign Out</a>
                                         </li>

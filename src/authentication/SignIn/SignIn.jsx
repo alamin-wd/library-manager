@@ -45,7 +45,7 @@ const SignIn = () => {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: error.message,
+        text: "Please use valid Email & Password",
         confirmButtonColor: '#d33'
       });
     }
@@ -72,7 +72,7 @@ const SignIn = () => {
     <div>
 
       <Helmet>
-        <title>Sign In | Library Manager</title>
+        <title>Library Manager</title>
       </Helmet>
 
       <div className="mt-6 py-6 bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100">
